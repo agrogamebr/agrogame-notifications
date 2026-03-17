@@ -31,3 +31,8 @@ steps:
 
 images:
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
+
+timeout: '3600s'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
