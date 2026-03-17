@@ -1,0 +1,12 @@
+target/
+src/test/
+temp/
+.mvn/
+.git/
+.idea/
+*.iml
+.vscode/
+*.log
+.env
+.env.local
+README.md
