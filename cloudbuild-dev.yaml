@@ -1,0 +1,33 @@
+steps:
+  # 1. Build da imagem Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
+      - '.'
+
+  # 2. Push para o Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
+
+  # 3. Deploy no Cloud Run (Instância de DEV)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'agrogame-notifications-dev' # Nome do serviço no Cloud Run
+      - '--image'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--allow-unauthenticated'
+      - '--no-cpu-throttling'
+      - '--set-secrets'
+      - 'RESEND_API_KEY=resend-api-key-dev:latest'
+
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
