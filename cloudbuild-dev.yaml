@@ -27,7 +27,7 @@ steps:
       - '--allow-unauthenticated'
       - '--no-cpu-throttling'
       - '--set-secrets'
-      - 'RESEND_API_KEY=resend-api-key-dev:latest'
+      - 'RESEND_API_KEY=dev-resend-api-key:latest'
 
 images:
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
