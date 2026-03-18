@@ -4,14 +4,16 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$SHORT_SHA'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:latest'
       - '.'
 
   # 2. Push para o Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$SHORT_SHA'
 
   # 3. Deploy no Cloud Run (Instância de DEV)
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -19,18 +21,16 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'agrogame-notifications-dev' # Nome do serviço no Cloud Run
-      - '--image'
-      - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
-      - '--region'
-      - 'us-central1'
+      - 'agrogame-notifications-dev'
+      - '--image=us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$SHORT_SHA'
+      - '--region=us-central1'
+      - '--platform=managed'
+      - '--service-account=bitbucket-deployer@$PROJECT_ID.iam.gserviceaccount.com'
+      - '--update-env-vars=SPRING_PROFILES_ACTIVE=dev'
+      - '--update-secrets=RESEND_API_KEY=dev-resend-api-key:latest'
       - '--allow-unauthenticated'
       - '--no-cpu-throttling'
-      - '--set-secrets'
-      - 'RESEND_API_KEY=dev-resend-api-key:latest'
-
-images:
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/agrogame-repo/agrogame-notifications-dev:$COMMIT_SHA'
+      - '--quiet'
 
 timeout: '3600s'
 
