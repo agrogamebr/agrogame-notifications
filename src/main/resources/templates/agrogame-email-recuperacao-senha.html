@@ -1,601 +1,286 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgroGame — Recuperação de Senha</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@600&family=Inter:wght@400;500;600&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+      xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:th="http://www.thymeleaf.org"
+      style="box-sizing: border-box;margin: 0;padding: 0;">
+<head style="box-sizing: border-box;margin: 0;padding: 0;">
+    <meta charset="UTF-8" style="box-sizing: border-box;margin: 0;padding: 0;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+          style="box-sizing: border-box;margin: 0;padding: 0;">
+    <title style="box-sizing: border-box;margin: 0;padding: 0;">AgroGame — Recuperação de Senha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" style="box-sizing: border-box;margin: 0;padding: 0;">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin
+          style="box-sizing: border-box;margin: 0;padding: 0;">
 
-    body {
-      background: #f4f6f9;
-      font-family: 'Roboto', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 40px 16px;
-    }
 
-    /* ── Email wrapper ── */
-    .email-wrapper {
-      width: 100%;
-      max-width: 800px;
-      background: #ffffff;
-      overflow: hidden;
-    }
-
-    /* ── Body content area ── */
-    .email-body {
-      padding: 0 0 56px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* ── Decorative background wave ── */
-    .wave-bg {
-      position: absolute;
-      top: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 130%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── Header / Logo ── */
-    .email-header {
-      padding: 40px 36px 0;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .logo-text {
-      font-family: 'Lexend', sans-serif;
-      font-weight: 600;
-      font-size: 36px;
-      line-height: 44px;
-      letter-spacing: -0.54px;
-      color: #0088ff;
-      white-space: nowrap;
-    }
-
-    .logo-icon {
-      width: 42px;
-      height: 42px;
-      transform: rotate(-11.68deg);
-      flex-shrink: 0;
-    }
-
-    /* ── Hero section ── */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 36px;
-      padding: 48px 36px 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* ── 3D Illustration ── */
-    .illus-wrap {
-      position: relative;
-      width: 170px;
-      height: 170px;
-      flex-shrink: 0;
-    }
-
-    .illus-card {
-      position: absolute;
-      border-radius: 18px;
-      background: #7c6af7;
-      box-shadow: 0 20px 40px rgba(124,106,247,0.35);
-      width: 120px;
-      height: 110px;
-      top: 25px;
-      left: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .chart-svg {
-      width: 72px;
-      height: 72px;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-    }
-
-    .face-blob {
-      position: absolute;
-      top: 8px;
-      right: 4px;
-      width: 48px;
-      height: 48px;
-      background: radial-gradient(circle at 40% 40%, #ff8fa3, #f05c7a);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 6px 16px rgba(240,92,122,0.4);
-    }
-
-    .gem-blob {
-      position: absolute;
-      bottom: 14px;
-      left: 0;
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, #e8e8f0, #c4c4d8);
-      border-radius: 8px;
-      transform: rotate(15deg);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-
-    .bar-strip {
-      position: absolute;
-      bottom: 16px;
-      right: 8px;
-      width: 30px;
-      height: 6px;
-      border-radius: 3px;
-      background: linear-gradient(90deg, #3de8c8, #2bb8a0);
-    }
-
-    /* ── Heading ── */
-    .hero-heading {
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      font-size: 32px;
-      line-height: 64px;
-      color: #061c3d;
-      text-align: center;
-      letter-spacing: -0.25px;
-      white-space: nowrap;
-    }
-
-    /* ── Content column ── */
-    .content-col {
-      max-width: 485px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    /* ── Intro paragraph ── */
-    .intro-text {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 1.4;
-      color: #061c3d;
-    }
-
-    .intro-text strong {
-      font-weight: 500;
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    /* ── Credentials block ── */
-    .credentials-block {
-      margin-top: 24px;
-      font-family: 'Roboto', sans-serif;
-      font-size: 18px;
-      line-height: 1.4;
-      color: #061c3d;
-    }
-
-    .credentials-block .label {
-      font-weight: 400;
-    }
-
-    .credentials-block .value {
-      font-weight: 500;
-    }
-
-    .credentials-block .credential-row {
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    /* ── CTA instruction ── */
-    .cta-instruction {
-      margin-top: 24px;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 1.4;
-      color: #061c3d;
-    }
-
-    /* ── CTA Button ── */
-    .cta-wrap {
-      margin-top: 24px;
-      width: 100%;
-    }
-
-    .cta-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      max-width: 479px;
-      height: 42px;
-      background: #0b63e5;
-      border-radius: 7px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 4px 14px rgba(11,99,229,0.3);
-    }
-
-    .cta-btn:hover {
-      background: #0952c6;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(11,99,229,0.4);
-    }
-
-    .cta-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(11,99,229,0.3);
-    }
-
-    .cta-btn span {
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 1;
-      color: #ffffff;
-      white-space: nowrap;
-    }
-
-    /* ── Disclaimer paragraph ── */
-    .disclaimer-text {
-      margin-top: 24px;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 1.4;
-      color: #061c3d;
-    }
-
-    /* ── Help note ── */
-    .help-note-wrap {
-      margin-top: 24px;
-      padding: 10px 14px;
-      background: #f5f7fa;
-      border-left: 3px solid #d0d8e4;
-      border-radius: 4px;
-    }
-
-    .help-text {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.4;
-      color: #061c3d;
-    }
-
-    .help-text a {
-      color: #061c3d;
-      text-decoration: underline;
-      text-decoration-skip-ink: none;
-      text-underline-offset: 2px;
-    }
-
-    /* ── Outer padding for all body content sections ── */
-    .body-content {
-      padding: 0 157px;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* ── Footer links ── */
-    .footer-links {
-      text-align: center;
-      padding: 64px 36px 40px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .footer-links a {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.4;
-      color: #061c3d;
-      text-decoration: underline;
-      text-decoration-skip-ink: none;
-      text-underline-offset: 2px;
-    }
-
-    .footer-links .sep {
-      margin: 0 4px;
-      color: #061c3d;
-      font-size: 14px;
-    }
-
-    /* ── Email Footer ── */
-    .email-footer {
-      background: #061c3d;
-      padding: 32px 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-    }
-
-    .footer-logo .logo-text {
-      color: #ffffff;
-    }
-
-    .footer-tagline {
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 24px;
-      color: rgba(255,255,255,0.9);
-      text-align: center;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .social-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .social-btn:hover { opacity: 0.8; }
-    .social-btn.linkedin  { background: #0e76a8; }
-    .social-btn.instagram { background: rgba(255,255,255,0.08); }
-
-    .footer-divider {
-      width: 100%;
-      height: 1px;
-      background: rgba(255,255,255,0.12);
-    }
-
-    .copyright {
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 24px;
-      color: rgba(255,255,255,0.7);
-      text-align: center;
-      width: 100%;
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .body-content {
-        padding-left: 28px;
-        padding-right: 28px;
-      }
-
-      .hero-heading {
-        font-size: 26px;
-        line-height: 36px;
-        white-space: normal;
-        text-align: center;
-      }
-
-      .email-header {
-        padding: 32px 24px 0;
-      }
-
-      .cta-btn {
-        max-width: 100%;
-      }
-    }
-  </style>
 </head>
-<body>
+<body style="box-sizing: border-box;margin: 0;padding: 40px 16px;background: #f4f6f9;font-family: 'Roboto', sans-serif;min-height: 100vh;display: flex;justify-content: center;">
 
-<div class="email-wrapper">
+<div class="email-wrapper"
+     style="box-sizing: border-box;margin: 0;padding: 0;width: 100%;max-width: 800px;background: #ffffff;overflow: hidden;">
 
-  <!-- ═══════════════════ BODY ═══════════════════ -->
-  <div class="email-body">
+    <!-- ═══════════════════ BODY ═══════════════════ -->
+    <div class="email-body"
+         style="box-sizing: border-box;margin: 0;padding: 0 0 56px;position: relative;overflow: hidden;">
 
-    <!-- Decorative background wave SVG -->
-    <svg class="wave-bg" viewBox="0 0 900 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <ellipse cx="450" cy="250" rx="400" ry="180" stroke="url(#wg1)" stroke-width="1.5" fill="none" transform="rotate(-12 450 250)"/>
-      <ellipse cx="450" cy="250" rx="320" ry="140" stroke="url(#wg2)" stroke-width="1" fill="none" transform="rotate(8 450 250)"/>
-      <ellipse cx="450" cy="250" rx="240" ry="105" stroke="url(#wg3)" stroke-width="1" fill="none" transform="rotate(-5 450 250)"/>
-      <defs>
-        <linearGradient id="wg1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#c4b8f7" stop-opacity="0.6"/>
-          <stop offset="50%" stop-color="#e0d8ff" stop-opacity="0.2"/>
-          <stop offset="100%" stop-color="#b8d4f7" stop-opacity="0.5"/>
-        </linearGradient>
-        <linearGradient id="wg2" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#d4c8ff" stop-opacity="0.5"/>
-          <stop offset="100%" stop-color="#c8d8ff" stop-opacity="0.3"/>
-        </linearGradient>
-        <linearGradient id="wg3" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#e8e0ff" stop-opacity="0.4"/>
-          <stop offset="100%" stop-color="#d0e4ff" stop-opacity="0.2"/>
-        </linearGradient>
-      </defs>
-    </svg>
-
-    <!-- ── Logo ── -->
-    <div class="email-header">
-      <div class="logo">
-        <span class="logo-text">Agro</span>
-        <svg class="logo-icon" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="21" cy="21" r="19" stroke="#0088ff" stroke-width="2" fill="none"/>
-          <circle cx="21" cy="21" r="13" fill="#0088ff" fill-opacity="0.08"/>
-          <circle cx="21" cy="21" r="8" fill="#0088ff" fill-opacity="0.15"/>
-          <circle cx="17.5" cy="19.5" r="1.5" fill="#0088ff"/>
-          <circle cx="24.5" cy="19.5" r="1.5" fill="#0088ff"/>
-          <path d="M17 23.5 Q21 26.5 25 23.5" stroke="#0088ff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <!-- Decorative background wave SVG -->
+        <svg class="wave-bg" viewbox="0 0 900 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+             style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;top: 80px;left: 50%;transform: translateX(-50%);width: 130%;pointer-events: none;z-index: 0;">
+            <ellipse cx="450" cy="250" rx="400" ry="180" stroke="url(#wg1)" stroke-width="1.5" fill="none"
+                     transform="rotate(-12 450 250)" style="box-sizing: border-box;margin: 0;padding: 0;"></ellipse>
+            <ellipse cx="450" cy="250" rx="320" ry="140" stroke="url(#wg2)" stroke-width="1" fill="none"
+                     transform="rotate(8 450 250)" style="box-sizing: border-box;margin: 0;padding: 0;"></ellipse>
+            <ellipse cx="450" cy="250" rx="240" ry="105" stroke="url(#wg3)" stroke-width="1" fill="none"
+                     transform="rotate(-5 450 250)" style="box-sizing: border-box;margin: 0;padding: 0;"></ellipse>
+            <defs style="box-sizing: border-box;margin: 0;padding: 0;">
+                <lineargradient id="wg1" x1="0%" y1="0%" x2="100%" y2="100%"
+                                style="box-sizing: border-box;margin: 0;padding: 0;">
+                    <stop offset="0%" stop-color="#c4b8f7" stop-opacity="0.6"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                    <stop offset="50%" stop-color="#e0d8ff" stop-opacity="0.2"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                    <stop offset="100%" stop-color="#b8d4f7" stop-opacity="0.5"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                </lineargradient>
+                <lineargradient id="wg2" x1="100%" y1="0%" x2="0%" y2="100%"
+                                style="box-sizing: border-box;margin: 0;padding: 0;">
+                    <stop offset="0%" stop-color="#d4c8ff" stop-opacity="0.5"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                    <stop offset="100%" stop-color="#c8d8ff" stop-opacity="0.3"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                </lineargradient>
+                <lineargradient id="wg3" x1="0%" y1="100%" x2="100%" y2="0%"
+                                style="box-sizing: border-box;margin: 0;padding: 0;">
+                    <stop offset="0%" stop-color="#e8e0ff" stop-opacity="0.4"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                    <stop offset="100%" stop-color="#d0e4ff" stop-opacity="0.2"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                </lineargradient>
+            </defs>
         </svg>
-        <span class="logo-text">Game</span>
-      </div>
-    </div>
 
-    <!-- ── Hero ── -->
-    <div class="hero">
-
-      <!-- Illustration -->
-      <div class="illus-wrap">
-        <div class="illus-card">
-          <svg class="chart-svg" viewBox="0 0 72 72">
-            <circle cx="36" cy="36" r="28" fill="none" stroke="#ffffff30" stroke-width="14"/>
-            <circle cx="36" cy="36" r="28" fill="none" stroke="#ff9c54" stroke-width="14"
-              stroke-dasharray="62 114" stroke-dashoffset="28" stroke-linecap="round"/>
-            <circle cx="36" cy="36" r="28" fill="none" stroke="#f05c7a" stroke-width="14"
-              stroke-dasharray="38 138" stroke-dashoffset="-36" stroke-linecap="round"/>
-            <circle cx="36" cy="36" r="28" fill="none" stroke="#7c6af7" stroke-width="14"
-              stroke-dasharray="28 148" stroke-dashoffset="-74" stroke-linecap="round"/>
-            <circle cx="36" cy="36" r="10" fill="#7c6af7"/>
-          </svg>
-          <div class="bar-strip"></div>
+        <!-- ── Logo ── -->
+        <div class="email-header"
+             style="box-sizing: border-box;margin: 0;padding: 40px 36px 0;display: flex;justify-content: center;position: relative;z-index: 2;">
+            <div class="logo"
+                 style="box-sizing: border-box;margin: 0;padding: 0;display: flex;align-items: center;gap: 6px;">
+                <span class="logo-text"
+                      style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Lexend', sans-serif;font-weight: 600;font-size: 36px;line-height: 44px;letter-spacing: -0.54px;color: #0088ff;white-space: nowrap;">Agro</span>
+                <svg class="logo-icon" width="42" height="42" viewbox="0 0 42 42" fill="none"
+                     xmlns="http://www.w3.org/2000/svg"
+                     style="box-sizing: border-box;margin: 0;padding: 0;width: 42px;height: 42px;transform: rotate(-11.68deg);flex-shrink: 0;">
+                    <circle cx="21" cy="21" r="19" stroke="#0088ff" stroke-width="2" fill="none"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <circle cx="21" cy="21" r="13" fill="#0088ff" fill-opacity="0.08"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <circle cx="21" cy="21" r="8" fill="#0088ff" fill-opacity="0.15"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <circle cx="17.5" cy="19.5" r="1.5" fill="#0088ff"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <circle cx="24.5" cy="19.5" r="1.5" fill="#0088ff"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <path d="M17 23.5 Q21 26.5 25 23.5" stroke="#0088ff" stroke-width="1.5" stroke-linecap="round"
+                          fill="none" style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                </svg>
+                <span class="logo-text"
+                      style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Lexend', sans-serif;font-weight: 600;font-size: 36px;line-height: 44px;letter-spacing: -0.54px;color: #0088ff;white-space: nowrap;">Game</span>
+            </div>
         </div>
-        <div class="face-blob">😊</div>
-        <div class="gem-blob"></div>
-      </div>
 
-      <!-- Heading -->
-      <h1 class="hero-heading">Suas informações de login</h1>
+        <!-- ── Hero ── -->
+        <div class="hero"
+             style="box-sizing: border-box;margin: 0;padding: 48px 36px 0;display: flex;flex-direction: column;align-items: center;gap: 36px;position: relative;z-index: 2;">
 
-      <!-- Content column (all body text) -->
-      <div class="content-col">
+            <!-- Illustration -->
+            <div class="illus-wrap"
+                 style="box-sizing: border-box;margin: 0;padding: 0;position: relative;width: 170px;height: 170px;flex-shrink: 0;">
+                <div class="illus-card"
+                     style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;border-radius: 18px;background: #7c6af7;box-shadow: 0 20px 40px rgba(124,106,247,0.35);width: 120px;height: 110px;top: 25px;left: 22px;display: flex;align-items: center;justify-content: center;overflow: hidden;">
+                    <svg class="chart-svg" viewbox="0 0 72 72"
+                         style="box-sizing: border-box;margin: 0;padding: 0;width: 72px;height: 72px;filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));">
+                        <circle cx="36" cy="36" r="28" fill="none" stroke="#ffffff30" stroke-width="14"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="36" cy="36" r="28" fill="none" stroke="#ff9c54" stroke-width="14"
+                                stroke-dasharray="62 114" stroke-dashoffset="28" stroke-linecap="round"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="36" cy="36" r="28" fill="none" stroke="#f05c7a" stroke-width="14"
+                                stroke-dasharray="38 138" stroke-dashoffset="-36" stroke-linecap="round"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="36" cy="36" r="28" fill="none" stroke="#7c6af7" stroke-width="14"
+                                stroke-dasharray="28 148" stroke-dashoffset="-74" stroke-linecap="round"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="36" cy="36" r="10" fill="#7c6af7"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    </svg>
+                    <div class="bar-strip"
+                         style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;bottom: 16px;right: 8px;width: 30px;height: 6px;border-radius: 3px;background: linear-gradient(90deg, #3de8c8, #2bb8a0);"></div>
+                </div>
+                <div class="face-blob"
+                     style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;top: 8px;right: 4px;width: 48px;height: 48px;background: radial-gradient(circle at 40% 40%, #ff8fa3, #f05c7a);border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 22px;box-shadow: 0 6px 16px rgba(240,92,122,0.4);">
+                    😊
+                </div>
+                <div class="gem-blob"
+                     style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;bottom: 14px;left: 0;width: 36px;height: 36px;background: linear-gradient(135deg, #e8e8f0, #c4c4d8);border-radius: 8px;transform: rotate(15deg);box-shadow: 0 4px 12px rgba(0,0,0,0.15);"></div>
+            </div>
 
-        <!-- Intro paragraph -->
-        <p class="intro-text">
-            <strong th:text="${nomeUsuario}">[Nome Usuário]</strong>
-          Conforme solicitado, seguem as informações de acesso à sua conta no Agro Game:
-        </p>
+            <!-- Heading -->
+            <h1 class="hero-heading"
+                style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Inter', sans-serif;font-weight: 500;font-size: 32px;line-height: 64px;color: #061c3d;text-align: center;letter-spacing: -0.25px;white-space: nowrap;">
+                Suas informações de login</h1>
 
-        <!-- Credentials block -->
-        <div class="credentials-block">
-          <span class="credential-row">
-            <strong th:text="${nomeUsuario}">[Nome Usuário]</strong>
+            <!-- Content column (all body text) -->
+            <div class="content-col"
+                 style="box-sizing: border-box;margin: 0;padding: 0;max-width: 485px;width: 100%;display: flex;flex-direction: column;gap: 0;">
+
+                <!-- Intro paragraph -->
+                <p class="intro-text"
+                   style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 18px;line-height: 1.4;color: #061c3d;">
+                    <strong th:text="${nomeUsuario}"
+                            style="box-sizing: border-box;margin: 0;padding: 0;font-weight: 500;display: block;margin-bottom: 2px;">[Nome
+                        Usuário]</strong>
+                    Conforme solicitado, seguem as informações de acesso à sua conta no Agro Game:
+                </p>
+
+                <!-- Credentials block -->
+                <div class="credentials-block"
+                     style="box-sizing: border-box;margin: 0;padding: 0;margin-top: 24px;font-family: 'Roboto', sans-serif;font-size: 18px;line-height: 1.4;color: #061c3d;">
+          <span class="credential-row"
+                style="box-sizing: border-box;margin: 0;padding: 0;display: block;margin-bottom: 2px;">
+            <strong th:text="${nomeUsuario}"
+                    style="box-sizing: border-box;margin: 0;padding: 0;">[Nome Usuário]</strong>
           </span>
-<!--          <span class="credential-row">-->
-<!--            <span class="label">Senha: </span><span class="label">896731</span>-->
-<!--          </span>-->
+                    <!--          <span class="credential-row">-->
+                    <!--            <span class="label">Senha: </span><span class="label">896731</span>-->
+                    <!--          </span>-->
+                </div>
+
+                <!-- CTA instruction -->
+                <p class="cta-instruction"
+                   style="box-sizing: border-box;margin: 0;padding: 0;margin-top: 24px;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 18px;line-height: 1.4;color: #061c3d;">
+                    Para recuperar seu acesso, clique no botão abaixo.</p>
+
+                <!-- CTA Button -->
+                <div class="cta-wrap" style="box-sizing: border-box;margin: 0;padding: 0;margin-top: 24px;width: 100%;">
+                    <a th:href="${linkRecuperacao}" target="_blank"
+                       style="...: ;box-sizing: border-box;margin: 0;padding: 0;">
+                        Recuperar Senha
+                    </a>
+                </div>
+
+                <!-- Disclaimer -->
+                <p class="disclaimer-text"
+                   style="box-sizing: border-box;margin: 0;padding: 0;margin-top: 24px;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 18px;line-height: 1.4;color: #061c3d;">
+                    Caso não tenha solicitado as informações, por favor desconsidere este e-mail.</p>
+
+                <!-- Help note -->
+                <div class="help-note-wrap"
+                     style="box-sizing: border-box;margin: 0;padding: 10px 14px;margin-top: 24px;background: #f5f7fa;border-left: 3px solid #d0d8e4;border-radius: 4px;">
+                    <p class="help-text"
+                       style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 14px;line-height: 1.4;color: #061c3d;">
+                        Não responda esse e-mail, em caso de dúvidas sobre nossos produtos e serviços. Acesse nossa
+                        <a href="#"
+                           style="box-sizing: border-box;margin: 0;padding: 0;color: #061c3d;text-decoration: underline;text-decoration-skip-ink: none;text-underline-offset: 2px;">seção
+                            de ajuda</a>
+                    </p>
+                </div>
+
+            </div>
+            <!-- end content-col -->
+
+        </div>
+        <!-- end hero -->
+
+        <!-- Footer links -->
+        <div class="footer-links"
+             style="box-sizing: border-box;margin: 0;padding: 64px 36px 40px;text-align: center;position: relative;z-index: 2;">
+            <a href="#"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 14px;line-height: 1.4;color: #061c3d;text-decoration: underline;text-decoration-skip-ink: none;text-underline-offset: 2px;">Termos
+                de uso</a>
+            <span class="sep"
+                  style="box-sizing: border-box;margin: 0 4px;padding: 0;color: #061c3d;font-size: 14px;">|</span>
+            <a href="#"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 14px;line-height: 1.4;color: #061c3d;text-decoration: underline;text-decoration-skip-ink: none;text-underline-offset: 2px;">Falar
+                com o suporte</a>
         </div>
 
-        <!-- CTA instruction -->
-        <p class="cta-instruction">Para recuperar seu acesso, clique no botão abaixo.</p>
+    </div>
+    <!-- end email-body -->
 
-        <!-- CTA Button -->
-        <div class="cta-wrap">
-            <a th:href="${linkRecuperacao}" target="_blank" style="...">
-                Recuperar Senha
-            </a>
+    <!-- ═══════════════════ FOOTER ═══════════════════ -->
+    <footer class="email-footer"
+            style="box-sizing: border-box;margin: 0;padding: 32px 36px;background: #061c3d;display: flex;flex-direction: column;gap: 24px;align-items: center;">
+        <div class="footer-inner"
+             style="box-sizing: border-box;margin: 0;padding: 0;display: flex;flex-direction: column;align-items: center;gap: 16px;width: 100%;">
+
+            <!-- Logo footer -->
+            <div class="footer-logo logo"
+                 style="box-sizing: border-box;margin: 0;padding: 0;display: flex;align-items: center;gap: 6px;">
+                <span class="logo-text"
+                      style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Lexend', sans-serif;font-weight: 600;font-size: 36px;line-height: 44px;letter-spacing: -0.54px;color: #ffffff;white-space: nowrap;">Agro</span>
+                <svg class="logo-icon" width="42" height="42" viewbox="0 0 42 42" fill="none"
+                     xmlns="http://www.w3.org/2000/svg"
+                     style="box-sizing: border-box;margin: 0;padding: 0;width: 42px;height: 42px;transform: rotate(-11.68deg);flex-shrink: 0;">
+                    <circle cx="21" cy="21" r="19" stroke="#fff" stroke-width="2" fill="none"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <circle cx="21" cy="21" r="13" fill="rgba(255,255,255,0.08)"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <circle cx="21" cy="21" r="8" fill="rgba(255,255,255,0.1)"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <circle cx="17.5" cy="19.5" r="1.5" fill="#fff"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <circle cx="24.5" cy="19.5" r="1.5" fill="#fff"
+                            style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    <path d="M17 23.5 Q21 26.5 25 23.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+                          fill="none" style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                </svg>
+                <span class="logo-text"
+                      style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Lexend', sans-serif;font-weight: 600;font-size: 36px;line-height: 44px;letter-spacing: -0.54px;color: #ffffff;white-space: nowrap;">Game</span>
+            </div>
+
+            <!-- Tagline -->
+            <p class="footer-tagline"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Inter', sans-serif;font-weight: 400;font-size: 14px;line-height: 24px;color: rgba(255,255,255,0.9);text-align: center;">
+                O ecossistema de benefícios de sucesso do agro</p>
+
+            <!-- Social links -->
+            <div class="social-links"
+                 style="box-sizing: border-box;margin: 0;padding: 0;display: flex;gap: 12px;align-items: center;">
+                <a href="#" class="social-btn linkedin" aria-label="LinkedIn"
+                   style="box-sizing: border-box;margin: 0;padding: 0;width: 40px;height: 40px;border-radius: 6px;display: flex;align-items: center;justify-content: center;text-decoration: none;transition: opacity 0.2s;background: #0e76a8;">
+                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none"
+                         style="box-sizing: border-box;margin: 0;padding: 0;">
+                        <path d="M3.6 5.3H1.1V15H3.6V5.3Z" fill="white"
+                              style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                        <path d="M2.35 4.2C3.12 4.2 3.75 3.57 3.75 2.8C3.75 2.03 3.12 1.4 2.35 1.4C1.58 1.4 0.95 2.03 0.95 2.8C0.95 3.57 1.58 4.2 2.35 4.2Z"
+                              fill="white" style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                        <path d="M8.7 5.3H6.3V15H8.8V10.1C8.8 8.7 9.06 7.36 10.82 7.36C12.56 7.36 12.58 8.94 12.58 10.2V15H15.08V9.7C15.08 7.52 14.6 5.1 11.98 5.1C10.62 5.1 9.7 5.83 9.32 6.5H9.28L8.7 5.3Z"
+                              fill="white" style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn instagram" aria-label="Instagram"
+                   style="box-sizing: border-box;margin: 0;padding: 0;width: 40px;height: 40px;border-radius: 6px;display: flex;align-items: center;justify-content: center;text-decoration: none;transition: opacity 0.2s;background: rgba(255,255,255,0.08);">
+                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none"
+                         style="box-sizing: border-box;margin: 0;padding: 0;">
+                        <rect x="1" y="1" width="14" height="14" rx="4" stroke="white" stroke-width="1.5"
+                              style="box-sizing: border-box;margin: 0;padding: 0;"></rect>
+                        <circle cx="8" cy="8" r="3" stroke="white" stroke-width="1.5"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="12" cy="4" r="1" fill="white"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    </svg>
+                </a>
+            </div>
+
         </div>
 
-        <!-- Disclaimer -->
-        <p class="disclaimer-text">Caso não tenha solicitado as informações, por favor desconsidere este e-mail.</p>
-
-        <!-- Help note -->
-        <div class="help-note-wrap">
-          <p class="help-text">
-            Não responda esse e-mail, em caso de dúvidas sobre nossos produtos e serviços. Acesse nossa
-            <a href="#">seção de ajuda</a>
-          </p>
+        <!-- Divider + copyright -->
+        <div style="width: 100%;display: flex;flex-direction: column;gap: 24px;align-items: center;box-sizing: border-box;margin: 0;padding: 0;">
+            <div class="footer-divider"
+                 style="box-sizing: border-box;margin: 0;padding: 0;width: 100%;height: 1px;background: rgba(255,255,255,0.12);"></div>
+            <p class="copyright"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Inter', sans-serif;font-weight: 400;font-size: 12px;line-height: 24px;color: rgba(255,255,255,0.7);text-align: center;width: 100%;">
+                © 2026 Agrogame. Todos os direitos reservados.</p>
         </div>
-
-      </div>
-      <!-- end content-col -->
-
-    </div>
-    <!-- end hero -->
-
-    <!-- Footer links -->
-    <div class="footer-links">
-      <a href="#">Termos de uso</a>
-      <span class="sep">|</span>
-      <a href="#">Falar com o suporte</a>
-    </div>
-
-  </div>
-  <!-- end email-body -->
-
-  <!-- ═══════════════════ FOOTER ═══════════════════ -->
-  <footer class="email-footer">
-    <div class="footer-inner">
-
-      <!-- Logo footer -->
-      <div class="footer-logo logo">
-        <span class="logo-text">Agro</span>
-        <svg class="logo-icon" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="21" cy="21" r="19" stroke="#fff" stroke-width="2" fill="none"/>
-          <circle cx="21" cy="21" r="13" fill="rgba(255,255,255,0.08)"/>
-          <circle cx="21" cy="21" r="8" fill="rgba(255,255,255,0.1)"/>
-          <circle cx="17.5" cy="19.5" r="1.5" fill="#fff"/>
-          <circle cx="24.5" cy="19.5" r="1.5" fill="#fff"/>
-          <path d="M17 23.5 Q21 26.5 25 23.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-        </svg>
-        <span class="logo-text">Game</span>
-      </div>
-
-      <!-- Tagline -->
-      <p class="footer-tagline">O ecossistema de benefícios de sucesso do agro</p>
-
-      <!-- Social links -->
-      <div class="social-links">
-        <a href="#" class="social-btn linkedin" aria-label="LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3.6 5.3H1.1V15H3.6V5.3Z" fill="white"/>
-            <path d="M2.35 4.2C3.12 4.2 3.75 3.57 3.75 2.8C3.75 2.03 3.12 1.4 2.35 1.4C1.58 1.4 0.95 2.03 0.95 2.8C0.95 3.57 1.58 4.2 2.35 4.2Z" fill="white"/>
-            <path d="M8.7 5.3H6.3V15H8.8V10.1C8.8 8.7 9.06 7.36 10.82 7.36C12.56 7.36 12.58 8.94 12.58 10.2V15H15.08V9.7C15.08 7.52 14.6 5.1 11.98 5.1C10.62 5.1 9.7 5.83 9.32 6.5H9.28L8.7 5.3Z" fill="white"/>
-          </svg>
-        </a>
-        <a href="#" class="social-btn instagram" aria-label="Instagram">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <rect x="1" y="1" width="14" height="14" rx="4" stroke="white" stroke-width="1.5"/>
-            <circle cx="8" cy="8" r="3" stroke="white" stroke-width="1.5"/>
-            <circle cx="12" cy="4" r="1" fill="white"/>
-          </svg>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Divider + copyright -->
-    <div style="width:100%; display:flex; flex-direction:column; gap:24px; align-items:center;">
-      <div class="footer-divider"></div>
-      <p class="copyright">© 2026 Agrogame. Todos os direitos reservados.</p>
-    </div>
-  </footer>
+    </footer>
 
 </div>
 <!-- end email-wrapper -->

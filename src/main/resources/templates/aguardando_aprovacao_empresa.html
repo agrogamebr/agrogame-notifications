@@ -1,634 +1,304 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgroGame — Cadastro Aguardando Aprovação</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@600&family=Inter:wght@400;500&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<html xmlns:th="http://www.thymeleaf.org" style="box-sizing: border-box;margin: 0;padding: 0;">
+<head style="box-sizing: border-box;margin: 0;padding: 0;">
+    <meta charset="UTF-8" style="box-sizing: border-box;margin: 0;padding: 0;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+          style="box-sizing: border-box;margin: 0;padding: 0;">
+    <title style="box-sizing: border-box;margin: 0;padding: 0;">AgroGame — Cadastro Aguardando Aprovação</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" style="box-sizing: border-box;margin: 0;padding: 0;">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin
+          style="box-sizing: border-box;margin: 0;padding: 0;">
 
-    body {
-      background: #f4f6f9;
-      font-family: 'Roboto', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 40px 16px;
-    }
 
-    /* ── Email wrapper ── */
-    .email-wrapper {
-      width: 100%;
-      max-width: 800px;
-      background: #ffffff;
-      border-radius: 0;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* ── Body content area ── */
-    .email-body {
-      padding: 0 0 56px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* ── Decorative background wave ── */
-    .wave-bg {
-      position: absolute;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 130%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── Header / Logo ── */
-    .email-header {
-      padding: 40px 36px 0;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .logo-text {
-      font-family: 'Lexend', sans-serif;
-      font-weight: 600;
-      font-size: 36px;
-      line-height: 44px;
-      letter-spacing: -0.54px;
-      color: #0088ff;
-      white-space: nowrap;
-    }
-
-    .logo-icon {
-      width: 42px;
-      height: 42px;
-      transform: rotate(-11.68deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* ── Hero section ── */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 36px;
-      padding: 48px 36px 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-illustration {
-      width: 209px;
-      height: 194px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* 3D illustration recreation */
-    .illus-wrap {
-      position: relative;
-      width: 170px;
-      height: 170px;
-    }
-
-    .illus-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 3px solid transparent;
-    }
-
-    .illus-card {
-      position: absolute;
-      border-radius: 18px;
-      background: #7c6af7;
-      box-shadow: 0 20px 40px rgba(124,106,247,0.35);
-      width: 120px;
-      height: 110px;
-      top: 25px;
-      left: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .illus-inner {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Donut chart segments */
-    .chart-svg {
-      width: 72px;
-      height: 72px;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-    }
-
-    /* Floating emoji face */
-    .face-blob {
-      position: absolute;
-      top: 8px;
-      right: 4px;
-      width: 48px;
-      height: 48px;
-      background: radial-gradient(circle at 40% 40%, #ff8fa3, #f05c7a);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 6px 16px rgba(240,92,122,0.4);
-    }
-
-    /* White gem */
-    .gem-blob {
-      position: absolute;
-      bottom: 14px;
-      left: 0px;
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, #e8e8f0, #c4c4d8);
-      border-radius: 8px;
-      transform: rotate(15deg);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-
-    /* Bar decoration */
-    .bar-strip {
-      position: absolute;
-      bottom: 16px;
-      right: 8px;
-      width: 30px;
-      height: 6px;
-      border-radius: 3px;
-      background: linear-gradient(90deg, #3de8c8, #2bb8a0);
-    }
-
-    .hero-heading {
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      font-size: 32px;
-      line-height: 36px;
-      color: #061c3d;
-      text-align: center;
-      letter-spacing: -0.25px;
-      max-width: 477px;
-    }
-
-    .hero-subtext {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 1.4;
-      color: #061c3d;
-      max-width: 477px;
-    }
-
-    .hero-subtext strong {
-      font-weight: 500;
-    }
-
-    /* ── Status section ── */
-    .status-section {
-      padding: 52px 161px 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    .status-title {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 600;
-      font-size: 18px;
-      line-height: 1.4;
-      color: #061c3d;
-      margin-bottom: 8px;
-    }
-
-    .status-desc {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.4;
-      color: #061c3d;
-      max-width: 477px;
-    }
-
-    /* Progress indicator */
-    .progress-bar-wrap {
-      margin-top: 28px;
-      max-width: 477px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .progress-steps {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-
-    .step-dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 600;
-      font-family: 'Roboto', sans-serif;
-      flex-shrink: 0;
-    }
-
-    .step-dot.done {
-      background: #0088ff;
-      color: #fff;
-    }
-
-    .step-dot.active {
-      background: #fff;
-      color: #0088ff;
-      border: 2px solid #0088ff;
-    }
-
-    .step-dot.pending {
-      background: #e8ecf0;
-      color: #8a9ab0;
-    }
-
-    .step-line {
-      flex: 1;
-      height: 2px;
-      background: #e8ecf0;
-    }
-
-    .step-line.done {
-      background: #0088ff;
-    }
-
-    .step-labels {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 6px;
-      font-family: 'Roboto', sans-serif;
-      font-size: 11px;
-      color: #8a9ab0;
-    }
-
-    .step-label.active-label {
-      color: #0088ff;
-      font-weight: 500;
-    }
-
-    /* ── Help note ── */
-    .help-note {
-      padding: 52px 161px 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    .help-text {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.4;
-      color: #061c3d;
-      max-width: 477px;
-    }
-
-    .help-text a {
-      color: #061c3d;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
-    /* ── Footer links ── */
-    .footer-links {
-      text-align: center;
-      padding: 80px 36px 40px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .footer-links a {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.4;
-      color: #061c3d;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
-    .footer-links .sep {
-      margin: 0 4px;
-      color: #061c3d;
-      font-size: 14px;
-    }
-
-    /* ── Footer ── */
-    .email-footer {
-      background: #061c3d;
-      padding: 32px 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .footer-logo .logo-text {
-      color: #ffffff;
-    }
-
-    .footer-tagline {
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 24px;
-      color: rgba(255,255,255,0.9);
-      text-align: center;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .social-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .social-btn:hover { opacity: 0.8; }
-
-    .social-btn.linkedin {
-      background: #0e76a8;
-    }
-
-    .social-btn.instagram {
-      background: rgba(255,255,255,0.08);
-    }
-
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: rgba(255,255,255,0.12);
-    }
-
-    .copyright {
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 24px;
-      color: rgba(255,255,255,0.7);
-      text-align: center;
-      width: 100%;
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .status-section,
-      .help-note {
-        padding-left: 32px;
-        padding-right: 32px;
-      }
-
-      .hero-heading {
-        font-size: 26px;
-        line-height: 32px;
-      }
-
-      .email-header {
-        padding: 32px 24px 0;
-      }
-    }
-  </style>
 </head>
-<body>
+<body style="box-sizing: border-box;margin: 0;padding: 40px 16px;background: #f4f6f9;font-family: 'Roboto', sans-serif;min-height: 100vh;display: flex;justify-content: center;">
 
-<div class="email-wrapper">
+<div class="email-wrapper"
+     style="box-sizing: border-box;margin: 0;padding: 0;width: 100%;max-width: 800px;background: #ffffff;border-radius: 0;overflow: hidden;position: relative;">
 
-  <!-- ═══════════════════ BODY ═══════════════════ -->
-  <div class="email-body">
+    <!-- ═══════════════════ BODY ═══════════════════ -->
+    <div class="email-body"
+         style="box-sizing: border-box;margin: 0;padding: 0 0 56px;position: relative;overflow: hidden;">
 
-    <!-- Decorative background wave SVG -->
-    <svg class="wave-bg" viewBox="0 0 900 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <ellipse cx="450" cy="250" rx="400" ry="180" stroke="url(#waveGrad1)" stroke-width="1.5" fill="none" transform="rotate(-12 450 250)"/>
-      <ellipse cx="450" cy="250" rx="320" ry="140" stroke="url(#waveGrad2)" stroke-width="1" fill="none" transform="rotate(8 450 250)"/>
-      <ellipse cx="450" cy="250" rx="240" ry="105" stroke="url(#waveGrad3)" stroke-width="1" fill="none" transform="rotate(-5 450 250)"/>
-      <defs>
-        <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#c4b8f7" stop-opacity="0.6"/>
-          <stop offset="50%" stop-color="#e0d8ff" stop-opacity="0.2"/>
-          <stop offset="100%" stop-color="#b8d4f7" stop-opacity="0.5"/>
-        </linearGradient>
-        <linearGradient id="waveGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#d4c8ff" stop-opacity="0.5"/>
-          <stop offset="100%" stop-color="#c8d8ff" stop-opacity="0.3"/>
-        </linearGradient>
-        <linearGradient id="waveGrad3" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#e8e0ff" stop-opacity="0.4"/>
-          <stop offset="100%" stop-color="#d0e4ff" stop-opacity="0.2"/>
-        </linearGradient>
-      </defs>
-    </svg>
+        <!-- Decorative background wave SVG -->
+        <svg class="wave-bg" viewbox="0 0 900 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+             style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;top: 100px;left: 50%;transform: translateX(-50%);width: 130%;pointer-events: none;z-index: 0;">
+            <ellipse cx="450" cy="250" rx="400" ry="180" stroke="url(#waveGrad1)" stroke-width="1.5" fill="none"
+                     transform="rotate(-12 450 250)" style="box-sizing: border-box;margin: 0;padding: 0;"></ellipse>
+            <ellipse cx="450" cy="250" rx="320" ry="140" stroke="url(#waveGrad2)" stroke-width="1" fill="none"
+                     transform="rotate(8 450 250)" style="box-sizing: border-box;margin: 0;padding: 0;"></ellipse>
+            <ellipse cx="450" cy="250" rx="240" ry="105" stroke="url(#waveGrad3)" stroke-width="1" fill="none"
+                     transform="rotate(-5 450 250)" style="box-sizing: border-box;margin: 0;padding: 0;"></ellipse>
+            <defs style="box-sizing: border-box;margin: 0;padding: 0;">
+                <lineargradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="100%"
+                                style="box-sizing: border-box;margin: 0;padding: 0;">
+                    <stop offset="0%" stop-color="#c4b8f7" stop-opacity="0.6"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                    <stop offset="50%" stop-color="#e0d8ff" stop-opacity="0.2"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                    <stop offset="100%" stop-color="#b8d4f7" stop-opacity="0.5"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                </lineargradient>
+                <lineargradient id="waveGrad2" x1="100%" y1="0%" x2="0%" y2="100%"
+                                style="box-sizing: border-box;margin: 0;padding: 0;">
+                    <stop offset="0%" stop-color="#d4c8ff" stop-opacity="0.5"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                    <stop offset="100%" stop-color="#c8d8ff" stop-opacity="0.3"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                </lineargradient>
+                <lineargradient id="waveGrad3" x1="0%" y1="100%" x2="100%" y2="0%"
+                                style="box-sizing: border-box;margin: 0;padding: 0;">
+                    <stop offset="0%" stop-color="#e8e0ff" stop-opacity="0.4"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                    <stop offset="100%" stop-color="#d0e4ff" stop-opacity="0.2"
+                          style="box-sizing: border-box;margin: 0;padding: 0;"></stop>
+                </lineargradient>
+            </defs>
+        </svg>
 
-    <!-- Logo -->
-    <div class="email-header">
-      <div class="logo">
-        <span class="logo-text">Agro</span>
-        <div class="logo-icon">
-          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="21" cy="21" r="19" stroke="#0088ff" stroke-width="2" fill="none"/>
-            <circle cx="21" cy="21" r="13" fill="#0088ff" fill-opacity="0.08"/>
-            <!-- game controller face -->
-            <circle cx="21" cy="21" r="8" fill="#0088ff" fill-opacity="0.15"/>
-            <!-- eyes -->
-            <circle cx="17.5" cy="19.5" r="1.5" fill="#0088ff"/>
-            <circle cx="24.5" cy="19.5" r="1.5" fill="#0088ff"/>
-            <!-- smile -->
-            <path d="M17 23.5 Q21 26.5 25 23.5" stroke="#0088ff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-          </svg>
-        </div>
-        <span class="logo-text">Game</span>
-      </div>
-    </div>
-
-    <!-- Hero -->
-    <div class="hero">
-
-      <!-- Illustration -->
-      <div class="hero-illustration">
-        <div class="illus-wrap">
-          <!-- Purple card -->
-          <div class="illus-card">
-            <div class="illus-inner">
-              <!-- Donut chart -->
-              <svg class="chart-svg" viewBox="0 0 72 72">
-                <circle cx="36" cy="36" r="28" fill="none" stroke="#ffffff30" stroke-width="14"/>
-                <circle cx="36" cy="36" r="28" fill="none" stroke="#ff9c54" stroke-width="14"
-                  stroke-dasharray="62 114" stroke-dashoffset="28" stroke-linecap="round"/>
-                <circle cx="36" cy="36" r="28" fill="none" stroke="#f05c7a" stroke-width="14"
-                  stroke-dasharray="38 138" stroke-dashoffset="-36" stroke-linecap="round"/>
-                <circle cx="36" cy="36" r="28" fill="none" stroke="#7c6af7" stroke-width="14"
-                  stroke-dasharray="28 148" stroke-dashoffset="-74" stroke-linecap="round"/>
-                <circle cx="36" cy="36" r="10" fill="#7c6af7"/>
-              </svg>
-              <!-- Bar strip -->
-              <div class="bar-strip"></div>
+        <!-- Logo -->
+        <div class="email-header"
+             style="box-sizing: border-box;margin: 0;padding: 40px 36px 0;display: flex;justify-content: center;position: relative;z-index: 2;">
+            <div class="logo"
+                 style="box-sizing: border-box;margin: 0;padding: 0;display: flex;align-items: center;gap: 6px;">
+                <span class="logo-text"
+                      style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Lexend', sans-serif;font-weight: 600;font-size: 36px;line-height: 44px;letter-spacing: -0.54px;color: #0088ff;white-space: nowrap;">Agro</span>
+                <div class="logo-icon"
+                     style="box-sizing: border-box;margin: 0;padding: 0;width: 42px;height: 42px;transform: rotate(-11.68deg);display: flex;align-items: center;justify-content: center;">
+                    <svg width="42" height="42" viewbox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg"
+                         style="box-sizing: border-box;margin: 0;padding: 0;">
+                        <circle cx="21" cy="21" r="19" stroke="#0088ff" stroke-width="2" fill="none"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="21" cy="21" r="13" fill="#0088ff" fill-opacity="0.08"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <!-- game controller face -->
+                        <circle cx="21" cy="21" r="8" fill="#0088ff" fill-opacity="0.15"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <!-- eyes -->
+                        <circle cx="17.5" cy="19.5" r="1.5" fill="#0088ff"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="24.5" cy="19.5" r="1.5" fill="#0088ff"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <!-- smile -->
+                        <path d="M17 23.5 Q21 26.5 25 23.5" stroke="#0088ff" stroke-width="1.5" stroke-linecap="round"
+                              fill="none" style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                    </svg>
+                </div>
+                <span class="logo-text"
+                      style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Lexend', sans-serif;font-weight: 600;font-size: 36px;line-height: 44px;letter-spacing: -0.54px;color: #0088ff;white-space: nowrap;">Game</span>
             </div>
-          </div>
-          <!-- Face blob -->
-          <div class="face-blob">😊</div>
-          <!-- Gem blob -->
-          <div class="gem-blob"></div>
         </div>
-      </div>
 
-      <!-- Heading -->
-      <h1 class="hero-heading">
-        Seu cadastro está<br>aguardando aprovação
-      </h1>
+        <!-- Hero -->
+        <div class="hero"
+             style="box-sizing: border-box;margin: 0;padding: 48px 36px 0;display: flex;flex-direction: column;align-items: center;gap: 36px;position: relative;z-index: 2;">
 
-      <!-- Subtext -->
-      <p class="hero-subtext">
-          Agora falta pouco para <strong th:text="${nomeEmpresa}">[Nome da Empresa]</strong> se tornar parceiro estratégico.
-      </p>
-    </div>
+            <!-- Illustration -->
+            <div class="hero-illustration"
+                 style="box-sizing: border-box;margin: 0;padding: 0;width: 209px;height: 194px;position: relative;display: flex;align-items: center;justify-content: center;">
+                <div class="illus-wrap"
+                     style="box-sizing: border-box;margin: 0;padding: 0;position: relative;width: 170px;height: 170px;">
+                    <!-- Purple card -->
+                    <div class="illus-card"
+                         style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;border-radius: 18px;background: #7c6af7;box-shadow: 0 20px 40px rgba(124,106,247,0.35);width: 120px;height: 110px;top: 25px;left: 22px;display: flex;align-items: center;justify-content: center;overflow: hidden;">
+                        <div class="illus-inner"
+                             style="box-sizing: border-box;margin: 0;padding: 0;width: 100%;height: 100%;position: relative;display: flex;align-items: center;justify-content: center;">
+                            <!-- Donut chart -->
+                            <svg class="chart-svg" viewbox="0 0 72 72"
+                                 style="box-sizing: border-box;margin: 0;padding: 0;width: 72px;height: 72px;filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));">
+                                <circle cx="36" cy="36" r="28" fill="none" stroke="#ffffff30" stroke-width="14"
+                                        style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                                <circle cx="36" cy="36" r="28" fill="none" stroke="#ff9c54" stroke-width="14"
+                                        stroke-dasharray="62 114" stroke-dashoffset="28" stroke-linecap="round"
+                                        style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                                <circle cx="36" cy="36" r="28" fill="none" stroke="#f05c7a" stroke-width="14"
+                                        stroke-dasharray="38 138" stroke-dashoffset="-36" stroke-linecap="round"
+                                        style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                                <circle cx="36" cy="36" r="28" fill="none" stroke="#7c6af7" stroke-width="14"
+                                        stroke-dasharray="28 148" stroke-dashoffset="-74" stroke-linecap="round"
+                                        style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                                <circle cx="36" cy="36" r="10" fill="#7c6af7"
+                                        style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                            </svg>
+                            <!-- Bar strip -->
+                            <div class="bar-strip"
+                                 style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;bottom: 16px;right: 8px;width: 30px;height: 6px;border-radius: 3px;background: linear-gradient(90deg, #3de8c8, #2bb8a0);"></div>
+                        </div>
+                    </div>
+                    <!-- Face blob -->
+                    <div class="face-blob"
+                         style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;top: 8px;right: 4px;width: 48px;height: 48px;background: radial-gradient(circle at 40% 40%, #ff8fa3, #f05c7a);border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 22px;box-shadow: 0 6px 16px rgba(240,92,122,0.4);">
+                        😊
+                    </div>
+                    <!-- Gem blob -->
+                    <div class="gem-blob"
+                         style="box-sizing: border-box;margin: 0;padding: 0;position: absolute;bottom: 14px;left: 0px;width: 36px;height: 36px;background: linear-gradient(135deg, #e8e8f0, #c4c4d8);border-radius: 8px;transform: rotate(15deg);box-shadow: 0 4px 12px rgba(0,0,0,0.15);"></div>
+                </div>
+            </div>
 
-    <!-- Status section -->
-    <div class="status-section">
-      <p class="status-title">Cadastro em análise</p>
-      <p class="status-desc">O prazo de análise e confirmação de seus dados são de 48 horas úteis</p>
+            <!-- Heading -->
+            <h1 class="hero-heading"
+                style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Inter', sans-serif;font-weight: 500;font-size: 32px;line-height: 36px;color: #061c3d;text-align: center;letter-spacing: -0.25px;max-width: 477px;">
+                Seu cadastro está<br style="box-sizing: border-box;margin: 0;padding: 0;">aguardando aprovação
+            </h1>
 
-      <!-- Progress steps -->
-      <div class="progress-bar-wrap">
-        <div class="progress-steps">
-          <div class="step-dot done">✓</div>
-          <div class="step-line done"></div>
-          <div class="step-dot active">2</div>
-          <div class="step-line"></div>
-          <div class="step-dot pending">3</div>
+            <!-- Subtext -->
+            <p class="hero-subtext"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 18px;line-height: 1.4;color: #061c3d;max-width: 477px;">
+                Agora falta pouco para <strong th:text="${nomeEmpresa}"
+                                               style="box-sizing: border-box;margin: 0;padding: 0;font-weight: 500;">[Nome
+                da Empresa]</strong> se tornar parceiro estratégico.
+            </p>
         </div>
-        <div class="step-labels">
-          <span>Cadastro enviado</span>
-          <span class="active-label">Em análise</span>
-          <span>Aprovado</span>
+
+        <!-- Status section -->
+        <div class="status-section"
+             style="box-sizing: border-box;margin: 0;padding: 52px 161px 0;position: relative;z-index: 2;">
+            <p class="status-title"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 600;font-size: 18px;line-height: 1.4;color: #061c3d;margin-bottom: 8px;">
+                Cadastro em análise</p>
+            <p class="status-desc"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 16px;line-height: 1.4;color: #061c3d;max-width: 477px;">
+                O prazo de análise e confirmação de seus dados são de 48 horas úteis</p>
+
+            <!-- Progress steps -->
+            <div class="progress-bar-wrap"
+                 style="box-sizing: border-box;margin: 0;padding: 0;margin-top: 28px;max-width: 477px;display: flex;flex-direction: column;gap: 8px;">
+                <div class="progress-steps"
+                     style="box-sizing: border-box;margin: 0;padding: 0;display: flex;align-items: center;gap: 0;">
+                    <div class="step-dot done"
+                         style="box-sizing: border-box;margin: 0;padding: 0;width: 28px;height: 28px;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 12px;font-weight: 600;font-family: 'Roboto', sans-serif;flex-shrink: 0;background: #0088ff;color: #fff;">
+                        ✓
+                    </div>
+                    <div class="step-line done"
+                         style="box-sizing: border-box;margin: 0;padding: 0;flex: 1;height: 2px;background: #0088ff;"></div>
+                    <div class="step-dot active"
+                         style="box-sizing: border-box;margin: 0;padding: 0;width: 28px;height: 28px;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 12px;font-weight: 600;font-family: 'Roboto', sans-serif;flex-shrink: 0;background: #fff;color: #0088ff;border: 2px solid #0088ff;">
+                        2
+                    </div>
+                    <div class="step-line"
+                         style="box-sizing: border-box;margin: 0;padding: 0;flex: 1;height: 2px;background: #e8ecf0;"></div>
+                    <div class="step-dot pending"
+                         style="box-sizing: border-box;margin: 0;padding: 0;width: 28px;height: 28px;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 12px;font-weight: 600;font-family: 'Roboto', sans-serif;flex-shrink: 0;background: #e8ecf0;color: #8a9ab0;">
+                        3
+                    </div>
+                </div>
+                <div class="step-labels"
+                     style="box-sizing: border-box;margin: 0;padding: 0;display: flex;justify-content: space-between;margin-top: 6px;font-family: 'Roboto', sans-serif;font-size: 11px;color: #8a9ab0;">
+                    <span style="box-sizing: border-box;margin: 0;padding: 0;">Cadastro enviado</span>
+                    <span class="active-label" style="box-sizing: border-box;margin: 0;padding: 0;">Em análise</span>
+                    <span style="box-sizing: border-box;margin: 0;padding: 0;">Aprovado</span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Help note -->
-    <div class="help-note">
-      <p class="help-text">
-        Não responda esse e-mail, em caso de dúvidas sobre nossos produtos e serviços. Acesse nossa
-        <a href="#">seção de ajuda</a>
-      </p>
-    </div>
-
-    <!-- Footer links -->
-    <div class="footer-links">
-      <a href="#">Termos de uso</a>
-      <span class="sep">|</span>
-      <a href="#">Falar com o suporte</a>
-    </div>
-
-  </div>
-  <!-- end email-body -->
-
-  <!-- ═══════════════════ FOOTER ═══════════════════ -->
-  <footer class="email-footer">
-    <div class="footer-inner">
-
-      <!-- Logo footer -->
-      <div class="footer-logo logo">
-        <span class="logo-text">Agro</span>
-        <div class="logo-icon">
-          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="21" cy="21" r="19" stroke="#fff" stroke-width="2" fill="none"/>
-            <circle cx="21" cy="21" r="13" fill="rgba(255,255,255,0.08)"/>
-            <circle cx="21" cy="21" r="8" fill="rgba(255,255,255,0.1)"/>
-            <circle cx="17.5" cy="19.5" r="1.5" fill="#fff"/>
-            <circle cx="24.5" cy="19.5" r="1.5" fill="#fff"/>
-            <path d="M17 23.5 Q21 26.5 25 23.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-          </svg>
+        <!-- Help note -->
+        <div class="help-note"
+             style="box-sizing: border-box;margin: 0;padding: 52px 161px 0;position: relative;z-index: 2;">
+            <p class="help-text"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 14px;line-height: 1.4;color: #061c3d;max-width: 477px;">
+                Não responda esse e-mail, em caso de dúvidas sobre nossos produtos e serviços. Acesse nossa
+                <a href="#"
+                   style="box-sizing: border-box;margin: 0;padding: 0;color: #061c3d;text-decoration: underline;text-underline-offset: 2px;">seção
+                    de ajuda</a>
+            </p>
         </div>
-        <span class="logo-text">Game</span>
-      </div>
 
-      <!-- Tagline -->
-      <p class="footer-tagline">O ecossistema de benefícios de sucesso do agro</p>
+        <!-- Footer links -->
+        <div class="footer-links"
+             style="box-sizing: border-box;margin: 0;padding: 80px 36px 40px;text-align: center;position: relative;z-index: 2;">
+            <a href="#"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 14px;line-height: 1.4;color: #061c3d;text-decoration: underline;text-underline-offset: 2px;">Termos
+                de uso</a>
+            <span class="sep"
+                  style="box-sizing: border-box;margin: 0 4px;padding: 0;color: #061c3d;font-size: 14px;">|</span>
+            <a href="#"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Roboto', sans-serif;font-weight: 400;font-size: 14px;line-height: 1.4;color: #061c3d;text-decoration: underline;text-underline-offset: 2px;">Falar
+                com o suporte</a>
+        </div>
 
-      <!-- Social links -->
-      <div class="social-links">
-        <!-- LinkedIn -->
-        <a href="#" class="social-btn linkedin" aria-label="LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.6 5.3H1.1V15H3.6V5.3Z" fill="white"/>
-            <path d="M2.35 4.2C3.12 4.2 3.75 3.57 3.75 2.8C3.75 2.03 3.12 1.4 2.35 1.4C1.58 1.4 0.95 2.03 0.95 2.8C0.95 3.57 1.58 4.2 2.35 4.2Z" fill="white"/>
-            <path d="M8.7 5.3H6.3V15H8.8V10.1C8.8 8.7 9.06 7.36 10.82 7.36C12.56 7.36 12.58 8.94 12.58 10.2V15H15.08V9.7C15.08 7.52 14.6 5.1 11.98 5.1C10.62 5.1 9.7 5.83 9.32 6.5H9.28L8.7 5.3Z" fill="white"/>
-          </svg>
-        </a>
-        <!-- Instagram -->
-        <a href="#" class="social-btn instagram" aria-label="Instagram">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="1" width="14" height="14" rx="4" stroke="white" stroke-width="1.5"/>
-            <circle cx="8" cy="8" r="3" stroke="white" stroke-width="1.5"/>
-            <circle cx="12" cy="4" r="1" fill="white"/>
-          </svg>
-        </a>
-      </div>
     </div>
+    <!-- end email-body -->
 
-    <!-- Divider + copyright -->
-    <div style="width:100%; display:flex; flex-direction:column; gap:24px; align-items:center;">
-      <div class="divider"></div>
-      <p class="copyright">© 2026 Agrogame. Todos os direitos reservados.</p>
-    </div>
-  </footer>
+    <!-- ═══════════════════ FOOTER ═══════════════════ -->
+    <footer class="email-footer"
+            style="box-sizing: border-box;margin: 0;padding: 32px 36px;background: #061c3d;display: flex;flex-direction: column;gap: 24px;align-items: center;">
+        <div class="footer-inner"
+             style="box-sizing: border-box;margin: 0;padding: 0;display: flex;flex-direction: column;align-items: center;gap: 16px;width: 100%;">
+
+            <!-- Logo footer -->
+            <div class="footer-logo logo"
+                 style="box-sizing: border-box;margin: 0;padding: 0;display: flex;align-items: center;gap: 6px;">
+                <span class="logo-text"
+                      style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Lexend', sans-serif;font-weight: 600;font-size: 36px;line-height: 44px;letter-spacing: -0.54px;color: #ffffff;white-space: nowrap;">Agro</span>
+                <div class="logo-icon"
+                     style="box-sizing: border-box;margin: 0;padding: 0;width: 42px;height: 42px;transform: rotate(-11.68deg);display: flex;align-items: center;justify-content: center;">
+                    <svg width="42" height="42" viewbox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg"
+                         style="box-sizing: border-box;margin: 0;padding: 0;">
+                        <circle cx="21" cy="21" r="19" stroke="#fff" stroke-width="2" fill="none"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="21" cy="21" r="13" fill="rgba(255,255,255,0.08)"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="21" cy="21" r="8" fill="rgba(255,255,255,0.1)"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="17.5" cy="19.5" r="1.5" fill="#fff"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="24.5" cy="19.5" r="1.5" fill="#fff"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <path d="M17 23.5 Q21 26.5 25 23.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+                              fill="none" style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                    </svg>
+                </div>
+                <span class="logo-text"
+                      style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Lexend', sans-serif;font-weight: 600;font-size: 36px;line-height: 44px;letter-spacing: -0.54px;color: #ffffff;white-space: nowrap;">Game</span>
+            </div>
+
+            <!-- Tagline -->
+            <p class="footer-tagline"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Inter', sans-serif;font-weight: 400;font-size: 14px;line-height: 24px;color: rgba(255,255,255,0.9);text-align: center;">
+                O ecossistema de benefícios de sucesso do agro</p>
+
+            <!-- Social links -->
+            <div class="social-links"
+                 style="box-sizing: border-box;margin: 0;padding: 0;display: flex;gap: 12px;align-items: center;">
+                <!-- LinkedIn -->
+                <a href="#" class="social-btn linkedin" aria-label="LinkedIn"
+                   style="box-sizing: border-box;margin: 0;padding: 0;width: 40px;height: 40px;border-radius: 6px;display: flex;align-items: center;justify-content: center;text-decoration: none;transition: opacity 0.2s;background: #0e76a8;">
+                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                         style="box-sizing: border-box;margin: 0;padding: 0;">
+                        <path d="M3.6 5.3H1.1V15H3.6V5.3Z" fill="white"
+                              style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                        <path d="M2.35 4.2C3.12 4.2 3.75 3.57 3.75 2.8C3.75 2.03 3.12 1.4 2.35 1.4C1.58 1.4 0.95 2.03 0.95 2.8C0.95 3.57 1.58 4.2 2.35 4.2Z"
+                              fill="white" style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                        <path d="M8.7 5.3H6.3V15H8.8V10.1C8.8 8.7 9.06 7.36 10.82 7.36C12.56 7.36 12.58 8.94 12.58 10.2V15H15.08V9.7C15.08 7.52 14.6 5.1 11.98 5.1C10.62 5.1 9.7 5.83 9.32 6.5H9.28L8.7 5.3Z"
+                              fill="white" style="box-sizing: border-box;margin: 0;padding: 0;"></path>
+                    </svg>
+                </a>
+                <!-- Instagram -->
+                <a href="#" class="social-btn instagram" aria-label="Instagram"
+                   style="box-sizing: border-box;margin: 0;padding: 0;width: 40px;height: 40px;border-radius: 6px;display: flex;align-items: center;justify-content: center;text-decoration: none;transition: opacity 0.2s;background: rgba(255,255,255,0.08);">
+                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                         style="box-sizing: border-box;margin: 0;padding: 0;">
+                        <rect x="1" y="1" width="14" height="14" rx="4" stroke="white" stroke-width="1.5"
+                              style="box-sizing: border-box;margin: 0;padding: 0;"></rect>
+                        <circle cx="8" cy="8" r="3" stroke="white" stroke-width="1.5"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                        <circle cx="12" cy="4" r="1" fill="white"
+                                style="box-sizing: border-box;margin: 0;padding: 0;"></circle>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Divider + copyright -->
+        <div style="width: 100%;display: flex;flex-direction: column;gap: 24px;align-items: center;box-sizing: border-box;margin: 0;padding: 0;">
+            <div class="divider"
+                 style="box-sizing: border-box;margin: 0;padding: 0;width: 100%;height: 1px;background: rgba(255,255,255,0.12);"></div>
+            <p class="copyright"
+               style="box-sizing: border-box;margin: 0;padding: 0;font-family: 'Inter', sans-serif;font-weight: 400;font-size: 12px;line-height: 24px;color: rgba(255,255,255,0.7);text-align: center;width: 100%;">
+                © 2026 Agrogame. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
 </div>
 <!-- end email-wrapper -->
