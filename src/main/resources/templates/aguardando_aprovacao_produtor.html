@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>AgroGame — Aguardando Aprovação</title>
     <style type="text/css">
         body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
@@ -16,17 +16,22 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f6f9">
     <tr>
         <td align="center" valign="top" style="padding: 40px 10px;">
-            <table width="600" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width: 600px; width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            <table width="600" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff"
+                   style="max-width: 600px; width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
                 <tr>
                     <td align="center" style="padding: 40px 20px 20px 20px; background-color: #ffffff;">
-                        <h1 style="margin: 0; color: #007BFF; font-family: 'Lexend', Arial, sans-serif; font-size: 28px; font-weight: bold; letter-spacing: -1px;">Agro <span style="margin-left:5px;">Game</span></h1>
+                        <img src="https://storage.googleapis.com/agrogame-public-dev/logo-agro-game.png"
+                             alt="Logo AgroGame" width="300"
+                             style="margin: 0; max-width: 300px; width: 100%; height: auto; border-radius: 16px; display: block;"/>
                     </td>
                 </tr>
-                <tr>
-                    <td align="center" style="padding: 20px; background-color: #ffffff;">
-                        <img src="https://via.placeholder.com/300x200/FFF3D4/333333?text=Aguardando+Aprova%C3%A7%C3%A3o" alt="Aguardando Aprovação" width="300" style="max-width: 300px; width: 100%; height: auto; border-radius: 16px; display: block;" />
-                    </td>
-                </tr>
+                <!--                <tr>-->
+                <!--                    <td align="center" style="padding: 20px; background-color: #ffffff;">-->
+                <!--                        <img src="https://storage.googleapis.com/agrogame-public-dev/anime-agro-game.png"-->
+                <!--                             alt="Anime AgroGame" width="300"-->
+                <!--                             style="max-width: 300px; width: 20%; height: auto; border-radius: 16px; display: block;"/>-->
+                <!--                    </td>-->
+                <!--                </tr>-->
                 <tr>
                     <td align="left" style="padding: 20px 40px 40px 40px; background-color: #ffffff;">
                         <p style="margin: 0 0 10px 0; font-family: 'Inter', Arial, sans-serif; font-size: 13px; font-weight: 600; color: #888888; text-transform: uppercase; letter-spacing: 1px;">
@@ -36,7 +41,10 @@
                             Cadastro em <span style="color: #007BFF;">análise!</span>
                         </h2>
                         <p style="margin: 0 0 30px 0; font-family: 'Roboto', Arial, sans-serif; font-size: 16px; line-height: 24px; color: #4b5563;">
-                            Agora falta pouco para <strong th:text="${nomeProdutor}">{{nomeProdutor}}</strong> se tornar parceiro estratégico.<br><br>O prazo de análise e confirmação de seus dados é de <strong>48 horas úteis</strong>.<br>Assim que for aprovado, você receberá um novo e-mail para acessar a plataforma.
+                            Agora falta pouco para <strong th:text="${nomeProdutor}">{{nomeProdutor}}</strong> se tornar
+                            parceiro estratégico.<br><br>O prazo de análise e confirmação de seus dados é de <strong>48
+                            horas úteis</strong>.<br>Assim que for aprovado, você receberá um novo e-mail para acessar a
+                            plataforma.
                         </p>
 
 
@@ -46,25 +54,36 @@
                     <td align="center" bgcolor="#0b132a" style="padding: 40px 40px; background-color: #0b132a;">
                         <table width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
-                                <td width="50%" align="left" valign="top">
-                                    <h2 style="margin: 0 0 10px 0; color: #ffffff; font-family: 'Lexend', Arial, sans-serif; font-size: 22px; font-weight: bold; letter-spacing: -1px;">Agro Game</h2>
-                                    <p style="margin: 0; font-family: 'Roboto', Arial, sans-serif; font-size: 13px; color: #9ca3af; line-height: 20px;">
-                                        O ecossistema<br>de benefícios<br>de sucesso do agro
+                                <td width="100%" align="center" valign="top">
+                                    <!--                                    <h2 style="margin: 0 0 10px 0; color: #ffffff; font-family: 'Lexend', Arial, sans-serif; font-size: 22px; font-weight: bold; letter-spacing: -1px;">-->
+                                    <!--                                        Agro Game</h2>-->
+                                    <img src="https://storage.googleapis.com/agrogame-public-dev/logo-agro-game-branca.png">
+                                    <p style="margin: 15px 0 15px 0; font-family: 'Roboto', Arial, sans-serif; font-size: 14px; color: #9ca3af; line-height: 20px; text-align: center;">
+                                        O ecossistema de benefícios de sucesso do agro
+                                    </p>
+                                    <p style="margin: 0 0 15px 0; diplay: inline;font-family: 'Roboto', Arial, sans-serif; font-size: 12px; color: #6b7280;">
+                                        © 2026 Agrogame.<br>Todos os direitos reservados.
                                     </p>
                                 </td>
                                 <td width="50%" align="right" valign="top">
-                                    <p style="margin: 0 0 15px 0; font-family: 'Roboto', Arial, sans-serif; font-size: 12px; color: #6b7280;">
-                                        © 2026 Agrogame.<br>Todos os direitos reservados.
-                                    </p>
+                                    <!--                                    <p style="margin: 0 0 15px 0; font-family: 'Roboto', Arial, sans-serif; font-size: 12px; color: #6b7280;">-->
+                                    <!--                                        © 2026 Agrogame.<br>Todos os direitos reservados.-->
+                                    <!--                                    </p>-->
                                     <table border="0" cellpadding="0" cellspacing="0" align="right">
-                                        <tr>
-                                            <td style="padding-right: 12px;">
-                                                <a href="#"><img src="https://via.placeholder.com/30/0b132a/ffffff?text=IN" width="24" height="24" alt="LinkedIn" style="display: block; border-radius: 4px;"></a>
-                                            </td>
-                                            <td>
-                                                <a href="#"><img src="https://via.placeholder.com/30/0b132a/ffffff?text=IG" width="24" height="24" alt="Instagram" style="display: block; border-radius: 4px;"></a>
-                                            </td>
-                                        </tr>
+                                        <!--                                        <tr>-->
+                                        <!--                                            <td style="padding-right: 12px;">-->
+                                        <!--                                                <a href="#"><img-->
+                                        <!--                                                        src="https://via.placeholder.com/30/0b132a/ffffff?text=IN"-->
+                                        <!--                                                        width="24" height="24" alt="LinkedIn"-->
+                                        <!--                                                        style="display: block; border-radius: 4px;"></a>-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <a href="#"><img-->
+                                        <!--                                                        src="https://via.placeholder.com/30/0b132a/ffffff?text=IG"-->
+                                        <!--                                                        width="24" height="24" alt="Instagram"-->
+                                        <!--                                                        style="display: block; border-radius: 4px;"></a>-->
+                                        <!--                                            </td>-->
+                                        <!--                                        </tr>-->
                                     </table>
                                 </td>
                             </tr>
@@ -76,7 +95,8 @@
                 <tr>
                     <td align="center" style="padding: 20px 10px; font-family: 'Roboto', Arial, sans-serif;">
                         <p style="margin: 0 0 10px 0; font-size: 12px; color: #9ca3af; line-height: 18px;">
-                            Não responda esse e-mail. Em caso de dúvidas sobre nossos produtos e serviços. Acesse nossa <a href="#" style="color: #6b7280; text-decoration: underline;">seção de ajuda</a>.
+                            Não responda esse e-mail. Em caso de dúvidas sobre nossos produtos e serviços. Acesse nossa
+                            <a href="#" style="color: #6b7280; text-decoration: underline;">seção de ajuda</a>.
                         </p>
                         <p style="margin: 0; font-size: 12px; color: #9ca3af;">
                             <a href="#" style="color: #6b7280; text-decoration: none;">Termos de uso</a> &nbsp;|&nbsp;

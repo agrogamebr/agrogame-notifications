@@ -19,32 +19,30 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f6f9">
     <tr>
         <td align="center" valign="top" style="padding: 40px 10px;">
-
-            <!-- ======================================================= -->
-            <!-- O "CHARUTÃO" - Wrapper Central de 600px                 -->
-            <!-- ======================================================= -->
             <table width="600" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff"
                    style="max-width: 600px; width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-
-                <!-- HEADER: Logo -->
                 <tr>
                     <td align="center" style="padding: 40px 20px 20px 20px; background-color: #ffffff;">
-                        <h1 style="margin: 0; color: #007BFF; font-family: 'Lexend', Arial, sans-serif; font-size: 28px; font-weight: bold; letter-spacing: -1px;">
-                            Agro <span style="margin-left:5px;">Game</span></h1>
+                        <img src="https://storage.googleapis.com/agrogame-public-dev/logo-agro-game.png"
+                             alt="Logo AgroGame" width="300"
+                             style="margin: 0; max-width: 300px; width: 100%; height: auto; border-radius: 16px; display: block;"/>
                     </td>
                 </tr>
-
-                <!-- ILUSTRAÇÃO SUPERIOR -->
-                <tr>
-                    <td align="center" style="padding: 20px; background-color: #ffffff;">
-                        <!-- Coloque o link da ilustração exportada do Figma aqui depois -->
-                        <img src="https://via.placeholder.com/300x200/FFF3D4/333333?text=Ilustração+3D+Aprovado"
-                             alt="Cadastro Aprovado" width="300"
-                             style="max-width: 300px; width: 100%; height: auto; border-radius: 16px; display: block;"/>
-                    </td>
-                </tr>
-
-                <!-- CONTEÚDO PRINCIPAL -->
+                <!--                <tr>-->
+                <!--                    <td align="center" style="padding: 20px; background-color: #ffffff;">-->
+                <!--                        <img src="https://storage.googleapis.com/agrogame-public-dev/anime-agro-game.png"-->
+                <!--                             alt="Anime AgroGame" width="300"-->
+                <!--                             style="max-width: 300px; width: 20%; height: auto; border-radius: 16px; display: block;"/>-->
+                <!--                    </td>-->
+                <!--                </tr>-->
+                <!--                <tr>-->
+                <!--                    <td align="center" style="padding: 20px; background-color: #ffffff;">-->
+                <!--                        &lt;!&ndash; Coloque o link da ilustração exportada do Figma aqui depois &ndash;&gt;-->
+                <!--                        <img src="https://via.placeholder.com/300x200/FFF3D4/333333?text=Ilustração+3D+Aprovado"-->
+                <!--                             alt="Cadastro Aprovado" width="300"-->
+                <!--                             style="max-width: 300px; width: 100%; height: auto; border-radius: 16px; display: block;"/>-->
+                <!--                    </td>-->
+                <!--                </tr>-->
                 <tr>
                     <td align="left" style="padding: 20px 40px 40px 40px; background-color: #ffffff;">
 
@@ -72,112 +70,113 @@
                                     <table width="100%" border="0" cellpadding="0" cellspacing="0"
                                            style="font-family: 'Roboto', Arial, sans-serif; font-size: 14px; color: #4b5563; line-height: 20px;">
                                         <tr>
-                                            <tr width="33%" valign="top" style="padding-bottom: 10px;">
-                                                <strong style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 2px;">Nome</strong>
-                                                <span th:text="${nomeProdutor}">{{nomeProdutor}}</span>
-                                                <br></br>
-                                            </tr>
-                                            <tr width="33%" valign="top" style="padding-bottom: 10px;">
-                                                <strong style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 2px;">CPF</strong>
-                                                <span th:text="${cpf}">{{cpf}}</span>
-                                                <br></br>
-                                            </tr>
-                                            <tr width="34%" valign="top" style="padding-bottom: 10px;">
-                                                <strong style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 2px;">Email</strong>
-                                                <span th:text="${emailProdutor}">{{emailProdutor}}</span>
-                                                <br></br>
-                                            </tr>
+                                        <tr width="33%" valign="top" style="padding-bottom: 10px;">
+                                            <strong style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 2px;">Nome</strong>
+                                            <span th:text="${nomeProdutor}">{{nomeProdutor}}</span>
+                                            <br></br>
                                         </tr>
-                                    </table>
-                                </td>
+                                        <tr width="33%" valign="top" style="padding-bottom: 10px;">
+                                            <strong style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 2px;">CPF</strong>
+                                            <span th:text="${cpf}">{{cpf}}</span>
+                                            <br></br>
+                                        </tr>
+                                        <tr width="34%" valign="top" style="padding-bottom: 10px;">
+                                            <strong style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 2px;">Email</strong>
+                                            <span th:text="${emailProdutor}">{{emailProdutor}}</span>
+                                            <br></br>
+                                        </tr>
                             </tr>
                         </table>
-
-                        <!-- BOTÃO DE AÇÃO (Blindado para Gmail) -->
-                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td align="center">
-                                    <table border="0" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td align="center" bgcolor="#0056FF"
-                                                style="border-radius: 8px; display: block;">
-                                                <a href="#" target="_blank"
-                                                   style="display: inline-block; padding: 14px 40px; font-family: 'Inter', Arial, sans-serif; font-size: 15px; color: #ffffff; text-decoration: none; font-weight: 600; line-height: 100%; border-radius: 8px;">Acessar
-                                                    o Agro Game</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-
                     </td>
                 </tr>
-
-                <!-- FOOTER ESCURO INFERIOR -->
-                <tr>
-                    <td align="center" bgcolor="#0b132a" style="padding: 40px 40px; background-color: #0b132a;">
-
-                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td width="50%" align="left" valign="top">
-                                    <h2 style="margin: 0 0 10px 0; color: #ffffff; font-family: 'Lexend', Arial, sans-serif; font-size: 22px; font-weight: bold; letter-spacing: -1px;">
-                                        Agro Game</h2>
-                                    <p style="margin: 0; font-family: 'Roboto', Arial, sans-serif; font-size: 13px; color: #9ca3af; line-height: 20px;">
-                                        O ecossistema<br>de benefícios<br>de sucesso do agro
-                                    </p>
-                                </td>
-
-                                <td width="50%" align="right" valign="top">
-                                    <p style="margin: 0 0 15px 0; font-family: 'Roboto', Arial, sans-serif; font-size: 12px; color: #6b7280;">
-                                        © 2026 Agrogame.<br>Todos os direitos reservados.
-                                    </p>
-
-                                    <!-- Ícones Redes Sociais -->
-                                    <table border="0" cellpadding="0" cellspacing="0" align="right">
-                                        <tr>
-                                            <td style="padding-right: 12px;">
-                                                <a href="#"><img
-                                                        src="https://via.placeholder.com/30/0b132a/ffffff?text=IN"
-                                                        width="24" height="24" alt="LinkedIn"
-                                                        style="display: block; border-radius: 4px;"></a>
-                                            </td>
-                                            <td>
-                                                <a href="#"><img
-                                                        src="https://via.placeholder.com/30/0b132a/ffffff?text=IG"
-                                                        width="24" height="24" alt="Instagram"
-                                                        style="display: block; border-radius: 4px;"></a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-
-                    </td>
-                </tr>
-
             </table>
-            <!-- FIM DO CHARUTÃO -->
 
-            <!-- LINKS AUXILIARES (Fora da caixa) -->
-            <table width="600" border="0" cellpadding="0" cellspacing="0" style="max-width: 600px; width: 100%;">
+            <!-- BOTÃO DE AÇÃO (Blindado para Gmail) -->
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td align="center" style="padding: 20px 10px; font-family: 'Roboto', Arial, sans-serif;">
-                        <p style="margin: 0 0 10px 0; font-size: 12px; color: #9ca3af; line-height: 18px;">
-                            Não responda esse e-mail. Em caso de dúvidas sobre nossos produtos e serviços. Acesse nossa
-                            <a href="#" style="color: #6b7280; text-decoration: underline;">seção de ajuda</a>.
-                        </p>
-                        <p style="margin: 0; font-size: 12px; color: #9ca3af;">
-                            <a href="#" style="color: #6b7280; text-decoration: none;">Termos de uso</a> &nbsp;|&nbsp;
-                            <a href="#" style="color: #6b7280; text-decoration: none;">Falar com o suporte</a>
-                        </p>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td align="center" bgcolor="#0056FF"
+                                    style="border-radius: 8px; display: block;">
+                                    <a href="#" target="_blank"
+                                       style="display: inline-block; padding: 14px 40px; font-family: 'Inter', Arial, sans-serif; font-size: 15px; color: #ffffff; text-decoration: none; font-weight: 600; line-height: 100%; border-radius: 8px;">Acessar
+                                        o Agro Game</a>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>
 
         </td>
     </tr>
+    <tr>
+        <td align="center" bgcolor="#0b132a" style="padding: 40px 40px; background-color: #0b132a;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="100%" align="center" valign="top">
+                        <!--                                    <h2 style="margin: 0 0 10px 0; color: #ffffff; font-family: 'Lexend', Arial, sans-serif; font-size: 22px; font-weight: bold; letter-spacing: -1px;">-->
+                        <!--                                        Agro Game</h2>-->
+                        <img src="https://storage.googleapis.com/agrogame-public-dev/logo-agro-game-branca.png">
+                        <p style="margin: 15px 0 15px 0; font-family: 'Roboto', Arial, sans-serif; font-size: 14px; color: #9ca3af; line-height: 20px; text-align: center;">
+                            O ecossistema de benefícios de sucesso do agro
+                        </p>
+                        <p style="margin: 0 0 15px 0; diplay: inline;font-family: 'Roboto', Arial, sans-serif; font-size: 12px; color: #6b7280;">
+                            © 2026 Agrogame.<br>Todos os direitos reservados.
+                        </p>
+                    </td>
+                    <td width="50%" align="right" valign="top">
+                        <!--                                    <p style="margin: 0 0 15px 0; font-family: 'Roboto', Arial, sans-serif; font-size: 12px; color: #6b7280;">-->
+                        <!--                                        © 2026 Agrogame.<br>Todos os direitos reservados.-->
+                        <!--                                    </p>-->
+                        <table border="0" cellpadding="0" cellspacing="0" align="right">
+                            <!--                                        <tr>-->
+                            <!--                                            <td style="padding-right: 12px;">-->
+                            <!--                                                <a href="#"><img-->
+                            <!--                                                        src="https://via.placeholder.com/30/0b132a/ffffff?text=IN"-->
+                            <!--                                                        width="24" height="24" alt="LinkedIn"-->
+                            <!--                                                        style="display: block; border-radius: 4px;"></a>-->
+                            <!--                                            </td>-->
+                            <!--                                            <td>-->
+                            <!--                                                <a href="#"><img-->
+                            <!--                                                        src="https://via.placeholder.com/30/0b132a/ffffff?text=IG"-->
+                            <!--                                                        width="24" height="24" alt="Instagram"-->
+                            <!--           git                                             style="display: block; border-radius: 4px;"></a>-->
+                            <!--                                            </td>-->
+                            <!--                                        </tr>-->
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+</td>
+</tr>
+
+</table>
+<!-- FIM DO CHARUTÃO -->
+
+<!-- LINKS AUXILIARES (Fora da caixa) -->
+<table width="600" border="0" cellpadding="0" cellspacing="0" style="max-width: 600px; width: 100%;">
+    <tr>
+        <td align="center" style="padding: 20px 10px; font-family: 'Roboto', Arial, sans-serif;">
+            <p style="margin: 0 0 10px 0; font-size: 12px; color: #9ca3af; line-height: 18px;">
+                Não responda esse e-mail. Em caso de dúvidas sobre nossos produtos e serviços. Acesse nossa
+                <a href="#" style="color: #6b7280; text-decoration: underline;">seção de ajuda</a>.
+            </p>
+            <p style="margin: 0; font-size: 12px; color: #9ca3af;">
+                <a href="#" style="color: #6b7280; text-decoration: none;">Termos de uso</a> &nbsp;|&nbsp;
+                <a href="#" style="color: #6b7280; text-decoration: none;">Falar com o suporte</a>
+            </p>
+        </td>
+    </tr>
+</table>
+
+</td>
+</tr>
 </table>
 
 </body>
